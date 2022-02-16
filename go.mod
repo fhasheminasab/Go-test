@@ -1,4 +1,4 @@
-module main
+module ghasedak
 
 go 1.17
 

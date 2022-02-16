@@ -3,8 +3,6 @@ package ghasedak
 import (
 	"bytes"
 	"fmt"
-
-	// "io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -35,9 +33,9 @@ func NewClient(apikey, linenumber string) Client {
 	return Client{APIKEY: apikey, LineNumber: linenumber, host: "api.ghasedak.me"}
 }
 
-// func (c *Client) SetHost(host string) {
-// 	c.host = host
-// }
+func (c *Client) SetHost(host string) {
+	c.host = host
+}
 
 // get status
 func (c *Client) Status(id string, itype string) Response {
