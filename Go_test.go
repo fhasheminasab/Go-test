@@ -1,4 +1,4 @@
-package Go_test
+package ghasedak
 
 import (
 	"bytes"
