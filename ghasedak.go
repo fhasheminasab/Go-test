@@ -75,6 +75,7 @@ func (c *Client) Status(id string, itype string) Response {
 		// b, err := io.ReadAll(rp.Body)
 		bodyString := string(bodyBytes)
 		response.Message = string(bodyBytes)
+		log.Println(string(bodyBytes))
 		//  gjson.Get(bodyString, "result.message").String()
 		response.ID = gjson.Get(bodyString, "items.۰").Int()
 		response.Success = true
