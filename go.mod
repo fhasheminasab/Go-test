@@ -1,4 +1,4 @@
-module ghasedak
+module ghasedak2
 
 go 1.17
 

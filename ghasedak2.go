@@ -1,4 +1,4 @@
-package ghasedak
+package ghasedak2
 
 import (
 	"bytes"
