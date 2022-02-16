@@ -3,6 +3,8 @@ package ghasedak
 import (
 	"bytes"
 	"fmt"
+
+	// "io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -26,7 +28,6 @@ type Response struct {
 	Code    int
 	Message string
 	ID      int64
-	Body    string
 }
 
 // NewClient create new ghasedak client
@@ -34,9 +35,9 @@ func NewClient(apikey, linenumber string) Client {
 	return Client{APIKEY: apikey, LineNumber: linenumber, host: "api.ghasedak.me"}
 }
 
-func (c *Client) SetHost(host string) {
-	c.host = host
-}
+// func (c *Client) SetHost(host string) {
+// 	c.host = host
+// }
 
 // get status
 func (c *Client) Status(id string, itype string) Response {
@@ -49,10 +50,12 @@ func (c *Client) Status(id string, itype string) Response {
 		log.Println(err)
 		return Response{Success: false, Message: err.Error()}
 	}
+
 	rq.Header.Set("Cache-Control", "no-cache")
 	rq.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	rq.Header.Set("Apikey", c.APIKEY)
 
+	// resp , err := http.Get(route)
 	rp, err := http.DefaultClient.Do(rq)
 	if err != nil {
 		log.Println(err)
@@ -67,10 +70,12 @@ func (c *Client) Status(id string, itype string) Response {
 		bodyBytes, err := ioutil.ReadAll(rp.Body)
 		if err != nil {
 			log.Println(err)
-			return Response{Success: true, Message: err.Error(), Body: rp.Status}
+			return Response{Success: true, Message: err.Error()}
 		}
+		// b, err := io.ReadAll(rp.Body)
 		bodyString := string(bodyBytes)
-		response.Message = gjson.Get(bodyString, "result.message").String()
+		response.Message = string(bodyBytes)
+		//  gjson.Get(bodyString, "result.message").String()
 		response.ID = gjson.Get(bodyString, "items.۰").Int()
 		response.Success = true
 
