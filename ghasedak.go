@@ -41,6 +41,7 @@ func NewClient(apikey, linenumber string) Client {
 
 // get status
 func (c *Client) Status(id string, itype string) Response {
+	fmt.Println("////////")
 	route := "http://" + c.host + "/v2/sms/status?agent=go"
 	data := strings.NewReader(fmt.Sprintf(`id=%s&type=%s`,
 		id, itype))
