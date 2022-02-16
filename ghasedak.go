@@ -72,7 +72,7 @@ func (c *Client) Status(id string, itype string) Response {
 			return Response{Success: true, Message: err.Error()}
 		}
 		// b, err := io.ReadAll(rp.Body)
-		fmt.Println("////////")
+		fmt.Println("2////////")
 		bodyString := string(bodyBytes)
 		response.Message = string(bodyBytes)
 		log.Println(string(bodyBytes))
