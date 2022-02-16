@@ -26,6 +26,7 @@ type Response struct {
 	Code    int
 	Message string
 	ID      int64
+	Body    string
 }
 
 // NewClient create new ghasedak client
@@ -66,7 +67,7 @@ func (c *Client) Status(id string, itype string) Response {
 		bodyBytes, err := ioutil.ReadAll(rp.Body)
 		if err != nil {
 			log.Println(err)
-			return Response{Success: true, Message: err.Error()}
+			return Response{Success: true, Message: err.Error(), Body: rp.Status}
 		}
 		bodyString := string(bodyBytes)
 		response.Message = gjson.Get(bodyString, "result.message").String()
